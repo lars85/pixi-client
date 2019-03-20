@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="vendor/autoload.php"
+         colors="true"
+         processIsolation="false"
+         stopOnFailure="false"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true">
+
+    <testsuites>
+        <testsuite name="Koempf pixi client test suite">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
+
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">src</directory>
+        </whitelist>
+    </filter>
+
+    <php>
+        <env name="KOEMPF_PIXI_CLIENT_TEST_LOGIN" value="..."/>
+        <env name="KOEMPF_PIXI_CLIENT_TEST_PASSWORD" value="..."/>
+        <env name="KOEMPF_PIXI_CLIENT_TEST_URI" value="..."/>
+    </php>
+</phpunit>
