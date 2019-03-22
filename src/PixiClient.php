@@ -6,7 +6,7 @@ namespace Koempf\PixiClient;
 
 use Koempf\PixiClient\Client\SoapClient;
 
-class PixiClient
+class PixiClient implements PixiClientInterface
 {
     /** @var SoapClient */
     private $soapClient;
