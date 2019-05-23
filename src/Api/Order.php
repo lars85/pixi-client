@@ -70,12 +70,16 @@ class Order extends AbstractApi
         $logKey = $importResponse->SqlRowSet[1]->diffgram->SqlRowSet2->row->_x0058_MLKey ?? null;
 
         if ($importImmediately) {
-            $this->soapClient->getResult(
-                'pixiImportProcessXML',
-                [
-                    '_x0058_MLLogKey' => $logKey,
-                ]
-            );
+            try {
+                $this->soapClient->getResult(
+                    'pixiImportProcessXML',
+                    [
+                        '_x0058_MLLogKey' => $logKey,
+                    ]
+                );
+            } catch (\Exception $exception) {
+                // do nothing
+            }
         }
 
         return $logKey;
