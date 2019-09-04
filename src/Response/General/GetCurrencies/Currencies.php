@@ -11,7 +11,7 @@ use Koempf\PixiClient\Response\Collection;
  * @method Currency[] getIterator()
  * @method Currency|null offsetGet()
  * @method Currency|null getFirst()
- * @method Currency|null getLast()()
+ * @method Currency|null getLast()
  */
 class Currencies extends Collection
 {

@@ -55,4 +55,17 @@ class StockTest extends TestCase
         $this->assertNotEmpty($stockItems->getFirst()->getGtin());
         $this->assertGreaterThan(200, $stockItems->getFirst()->getCost());
     }
+
+    public function testStockBins()
+    {
+        $sku = '368180';
+        $bins = $this->getPixiClient()->stock()->getItemBins(ItemFilter::create()->addSku($sku));
+
+        $this->assertGreaterThanOrEqual(1, count($bins));
+        $this->assertEquals($sku, $bins->getFirst()->getSku());
+        $this->assertNotEmpty($bins->getFirst()->getGtin());
+        $this->assertNotEmpty($bins->getFirst()->getName());
+        $this->assertNotEmpty($bins->getFirst()->getSortNum());
+        $this->assertNotEmpty($bins->getFirst()->getLocationId());
+    }
 }

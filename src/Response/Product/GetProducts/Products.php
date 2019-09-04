@@ -11,7 +11,7 @@ use Koempf\PixiClient\Response\Collection;
  * @method Product[] getIterator()
  * @method Product|null offsetGet()
  * @method Product|null getFirst()
- * @method Product|null getLast()()
+ * @method Product|null getLast()
  */
 class Products extends Collection
 {

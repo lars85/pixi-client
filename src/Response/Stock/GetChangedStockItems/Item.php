@@ -12,7 +12,7 @@ class Item
     private $sku;
     /** @var string */
     private $gtin;
-    /** @var string */
+    /** @var string|null */
     private $vendorNumber;
     /** @var int */
     private $physicalStock;
@@ -39,7 +39,7 @@ class Item
         $model->id = (int)$result->ItemKey;
         $model->sku = $result->ItemNrInt;
         $model->gtin = $result->EANUPC;
-        $model->vendorNumber = $result->ItemNrSuppl;
+        $model->vendorNumber = $result->ItemNrSuppl ?? null;
         $model->physicalStock = (int)$result->PhysicalStock;
         $model->availableStock = (int)$result->AvailableStock;
         $model->stockChange = (int)$result->StockChange;
@@ -66,7 +66,7 @@ class Item
         return $this->gtin;
     }
 
-    public function getVendorNumber(): string
+    public function getVendorNumber(): ?string
     {
         return $this->vendorNumber;
     }

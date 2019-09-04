@@ -18,11 +18,21 @@ class ProductTest extends TestCase
 
     public function testGetBundleItems()
     {
-        $bundleItems = $this->getPixiClient()->product()->getBundleItemsBySku('51583');
+        $bundleItems = $this->getPixiClient()->product()->getBundleItems();
+
+        $firstBundleItem = $bundleItems->getFirst();
+        $this->assertIsInt($firstBundleItem->getMainId());
+        $this->assertIsInt($firstBundleItem->getItemId());
+        $this->assertIsInt($firstBundleItem->getQty());
+    }
+
+    public function testGetBundleItemsExtended()
+    {
+        $bundleItems = $this->getPixiClient()->product()->getExtendedBundleItemsBySku('51583');
 
         $this->assertGreaterThan(3, $bundleItems->count());
 
-        $firstBundleItem = $bundleItems[0];
+        $firstBundleItem = $bundleItems->getFirst();
         $this->assertIsInt($firstBundleItem->getId());
         $this->assertNotEmpty($firstBundleItem->getId());
         $this->assertNotEmpty($firstBundleItem->getSku());

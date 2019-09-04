@@ -11,7 +11,7 @@ use Koempf\PixiClient\Response\Collection;
  * @method Invoice[] getIterator()
  * @method Invoice|null offsetGet()
  * @method Invoice|null getFirst()
- * @method Invoice|null getLast()()
+ * @method Invoice|null getLast()
  */
 class Invoices extends Collection
 {

@@ -11,7 +11,7 @@ use Koempf\PixiClient\Response\Collection;
  * @method Country[] getIterator()
  * @method Country|null offsetGet()
  * @method Country|null getFirst()
- * @method Country|null getLast()()
+ * @method Country|null getLast()
  */
 class Countries extends Collection
 {

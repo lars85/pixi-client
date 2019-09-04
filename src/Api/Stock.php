@@ -6,6 +6,7 @@ namespace Koempf\PixiClient\Api;
 
 use Koempf\PixiClient\Param\ItemFilter;
 use Koempf\PixiClient\Response\Stock\GetChangedStockItems;
+use Koempf\PixiClient\Response\Stock\GetItemBins\Bins;
 use Koempf\PixiClient\Response\Stock\GetStockItems;
 
 class Stock extends AbstractApi
@@ -44,5 +45,17 @@ class Stock extends AbstractApi
         );
 
         return GetStockItems\Items::create($results);
+    }
+
+    public function getItemBins(ItemFilter $filter): Bins
+    {
+        $results = $this->soapClient->getResults(
+            'pixiGetItemStockBins',
+            [
+                'ItemXML' => $filter->__toXml()
+            ]
+        );
+
+        return Bins::create($results);
     }
 }

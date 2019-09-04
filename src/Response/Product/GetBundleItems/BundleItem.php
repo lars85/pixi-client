@@ -7,19 +7,15 @@ namespace Koempf\PixiClient\Response\Product\GetBundleItems;
 class BundleItem
 {
     /** @var int */
-    private $id;
+    private $mainId;
+    /** @var int */
+    private $itemId;
     /** @var int */
     private $qty;
-    /** @var string */
-    private $sku;
-    /** @var string */
-    private $gtin;
-    /** @var string */
-    private $vendorNumber;
-    /** @var string */
-    private $name;
-    /** @var float */
-    private $price;
+    /** @var \DateTime */
+    private $createDate;
+    /** @var \DateTime */
+    private $updateDate;
 
     private function __construct()
     {
@@ -29,20 +25,23 @@ class BundleItem
     {
         $model = new self();
 
-        $model->id = (int)$result->BundleItemKey;
+        $model->mainId = (int)$result->ItemRef;
+        $model->itemId = (int)$result->BundleItemRef;
         $model->qty = (int)$result->Qty;
-        $model->sku = $result->ItemNrInt;
-        $model->gtin = $result->EANUPC;
-        $model->vendorNumber = $result->ItemNrSuppl;
-        $model->name = $result->ItemName;
-        $model->price = (float)$result->Price;
+        $model->createDate = new \DateTime($result->CreateDate);
+        $model->updateDate = new \DateTime($result->UpdateDate);
 
         return $model;
     }
 
-    public function getId(): int
+    public function getMainId(): int
     {
-        return $this->id;
+        return $this->mainId;
+    }
+
+    public function getItemId(): int
+    {
+        return $this->itemId;
     }
 
     public function getQty(): int
@@ -50,28 +49,13 @@ class BundleItem
         return $this->qty;
     }
 
-    public function getSku(): string
+    public function getCreateDate(): \DateTime
     {
-        return $this->sku;
+        return $this->createDate;
     }
 
-    public function getGtin(): string
+    public function getUpdateDate(): \DateTime
     {
-        return $this->gtin;
-    }
-
-    public function getVendorNumber(): string
-    {
-        return $this->vendorNumber;
-    }
-
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    public function getPrice(): float
-    {
-        return $this->price;
+        return $this->updateDate;
     }
 }
