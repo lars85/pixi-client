@@ -20,7 +20,7 @@ class Stock extends AbstractApi
         ?string $locationId = null
     ): GetChangedStockItems\Items {
 
-        $results = $this->soapClient->getResultsWithPagination(
+        $results = $this->soapClient->getResults(
             'pixiGetChangedItemStock',
             [
                 'Since' => $this->__getFormattedDateTime($startDate),
