@@ -24,7 +24,7 @@ class Stock extends AbstractApi
             'pixiGetChangedItemStock',
             [
                 'Since' => $this->__getFormattedDateTime($startDate),
-                'Rowcount' => $limit,
+                'Rowcount' => $limit ?? 999999,
                 'LocID' => $locationId,
                 'DateTo' => $endDate ? $this->__getFormattedDateTime($endDate) : null,
                 'Start' => $offset,
