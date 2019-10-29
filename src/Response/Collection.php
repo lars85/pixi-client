@@ -45,6 +45,11 @@ abstract class Collection implements CollectionInterface
         return count($this->items);
     }
 
+    public function __toArray(): array
+    {
+        return $this->items;
+    }
+
     public function sortByPropertyValue(string $property, bool $reverseOrder = false): self
     {
         return $this->sort(function ($a, $b) use ($property, $reverseOrder) {
