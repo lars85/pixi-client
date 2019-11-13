@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Koempf\PixiClient\Response\Product\GetBundleItems;
 
+use Koempf\PixiClient\Helper;
+
 class BundleItem
 {
     /** @var int */
@@ -28,8 +30,8 @@ class BundleItem
         $model->mainId = (int)$result->ItemRef;
         $model->itemId = (int)$result->BundleItemRef;
         $model->qty = (int)$result->Qty;
-        $model->createDate = new \DateTime($result->CreateDate);
-        $model->updateDate = new \DateTime($result->UpdateDate);
+        $model->createDate = Helper::createDateTime($result->CreateDate);
+        $model->updateDate = Helper::createDateTime($result->UpdateDate);
 
         return $model;
     }

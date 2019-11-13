@@ -25,6 +25,9 @@ class Item
     /** @var float */
     private $cost;
 
+    /** @var LocationStocks */
+    private $locationStocks;
+
     private function __construct()
     {
     }
@@ -41,6 +44,8 @@ class Item
         $model->availableStock = (int)$result->AvailableStock;
         $model->openOrderLinesQty = (int)$result->OpenOrderlineSum;
         $model->cost = (float)$result->SupplPrice;
+
+        $model->locationStocks = LocationStocks::createLocationStocks($result);
 
         return $model;
     }
@@ -88,5 +93,10 @@ class Item
     public function getCost(): float
     {
         return $this->cost;
+    }
+
+    public function getLocationStocks(): LocationStocks
+    {
+        return $this->locationStocks;
     }
 }

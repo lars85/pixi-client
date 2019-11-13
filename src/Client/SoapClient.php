@@ -20,7 +20,6 @@ class SoapClient
                 'password' => $password,
                 'uri' => $uri,
                 'location' => $uri,
-                'connection_timeout' => 15,
             ]
         );
     }

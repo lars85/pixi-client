@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Koempf\PixiClient\Response\Order\GetOrders;
 
+use Koempf\PixiClient\Helper;
+
 class Customer
 {
     /** @var bool */
@@ -42,10 +44,10 @@ class Customer
         $model->locked = $result->Locked !== 'N';
         $model->paymentCode = $result->PaymentCode;
         $model->shopId = $result->ShopID;
-        $model->createDate = new \DateTime($result->CreateDate);
-        $model->updateDate = new \DateTime($result->UpdateDate);
+        $model->createDate = Helper::createDateTime($result->CreateDate);
+        $model->updateDate = Helper::createDateTime($result->UpdateDate);
         $model->createdBy = $result->CreateEmp;
-        $model->updatedBy = $result->UpdateEmp;
+        $model->updatedBy = $result->UpdateEmp ?? null;
         $model->customerNumber = $result->CustomerNrExternal;
         $model->taxesOnInvoice = $result->TaxOnInvoice === 'Y';
         $model->posCustomer = $result->POSCustomer !== 'N';

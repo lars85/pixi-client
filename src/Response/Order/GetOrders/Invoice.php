@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Koempf\PixiClient\Response\Order\GetOrders;
 
+use Koempf\PixiClient\Helper;
+
 class Invoice
 {
     /** @var int */
@@ -25,23 +27,23 @@ class Invoice
 
         $model->id = (int)$result->InvoiceKey;
         $model->referenceNumber = $result->InvoiceNr;
-        $model->createDate = new \DateTime($result->InvDate);
-        $model->dueDate = new \DateTime($result->DueDate);
+        $model->createDate = Helper::createDateTime($result->InvDate);
+        $model->dueDate = Helper::createDateTime($result->DueDate);
         $model->highTaxes = (float)$result->VATBaseHigh;
         $model->lowTaxes = (float)$result->VATBaseLow;
         $model->total = (float)$result->Total;
         $model->totalInOrderCurrency = (float)$result->Total_OrderCurr;
         $model->paymentCode = $result->PaymentCode;
-        $model->paidDate = new \DateTime($result->PaidDate);
+        $model->paidDate = Helper::createDateTime($result->PaidDate);
         $model->paidAmount = (float)$result->PaidAmount;
-        $model->createDate = new \DateTime($result->CreateDate);
-        $model->updateDate = new \DateTime($result->UpdateDate);
+        $model->createDate = Helper::createDateTime($result->CreateDate);
+        $model->updateDate = Helper::createDateTime($result->UpdateDate);
         $model->createdBy = $result->CreateEmp;
         $model->updatedBy = $result->UpdateEmp;
         $model->boxNumber = $result->BoxNr;
         $model->shippingCost = (float)$result->Total_ShipCost;
         $model->shippingCostInOrderCurrency = (float)$result->Total_ShipCost_OrderCurr;
-        $model->scanOutDate = new \DateTime($result->ScanOutDate);
+        $model->scanOutDate = Helper::createDateTime($result->ScanOutDate);
         $model->currency = $result->OrderCurrency;
         $model->VATBaseHigh_OrderCurr = $result->VATBaseHigh_OrderCurr; // 0.0000
         $model->VATBaseLow_OrderCurr = $result->VATBaseLow_OrderCurr; // 0.0000

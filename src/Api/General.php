@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Koempf\PixiClient\Api;
 
-use Koempf\PixiClient\Response\General\GetCurrencies\Currencies;
+use DateTime;
+use DateTimeZone;
 use Koempf\PixiClient\Response\General\GetCountries\Countries;
+use Koempf\PixiClient\Response\General\GetCurrencies\Currencies;
 
 class General extends AbstractApi
 {
@@ -21,5 +23,12 @@ class General extends AbstractApi
         $results = $this->soapClient->getResults('pixiGetCountries');
 
         return Countries::create($results);
+    }
+
+    public function getServerTime(): DateTime
+    {
+        $result = $this->soapClient->getResult('pixiGetServerTime');
+
+        return new DateTime($result->ServerTime, new DateTimeZone('Europe/Berlin'));
     }
 }

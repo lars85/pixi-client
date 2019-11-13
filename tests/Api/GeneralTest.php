@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Koempf\PixiClient\Tests\Api\OrdersResponse;
 
+use DateTime;
+use DateTimeZone;
 use Koempf\PixiClient\Tests\Api\TestCase;
 
 class GeneralTest extends TestCase
 {
-    public function testCurrencies()
+    public function testCurrencies(): void
     {
         $currencies = $this->getPixiClient()->general()->getCurrencies();
 
@@ -17,7 +19,7 @@ class GeneralTest extends TestCase
         $this->assertTrue($currencies['EUR']->isActive());
     }
 
-    public function testCountries()
+    public function testCountries(): void
     {
         $countries = $this->getPixiClient()->general()->getCountries();
 
@@ -32,5 +34,15 @@ class GeneralTest extends TestCase
         $this->assertGreaterThan(1000, $countries['D']->getTaxesLimit());
         $this->assertTrue(in_array('Deutschland', $countries['D']->getNames()));
         $this->assertTrue($countries['D']->isEurope());
+    }
+
+    public function testServerTime(): void
+    {
+        $serverTime = $this->getPixiClient()->general()->getServerTime();
+
+        $now = new DateTime('now', new DateTimeZone('Europe/Berlin'));
+        $diff = abs($serverTime->getTimestamp() - $now->getTimestamp());
+
+        $this->assertLessThan(10, $diff);
     }
 }

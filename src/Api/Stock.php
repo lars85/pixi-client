@@ -35,12 +35,13 @@ class Stock extends AbstractApi
     }
 
     // @see http://apps-live.pixi.eu/api-developer-app/index.php/category/2/apicall/50
-    public function getStockItems(ItemFilter $filter): GetStockItems\Items
+    public function getStockItems(ItemFilter $filter, bool $includeLocationStock = false): GetStockItems\Items
     {
         $results = $this->soapClient->getResults(
             'pixiGetItemStock',
             [
-                'ItemXML' => $filter->__toXml()
+                'ItemXML' => $filter->__toXml(),
+                'LocationStock' => $includeLocationStock ? 1 : 0,
             ]
         );
 

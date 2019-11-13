@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Koempf\PixiClient\Response\Stock\GetChangedStockItems;
 
+use Koempf\PixiClient\Helper;
+
 class Item
 {
     /** @var int */
@@ -46,7 +48,7 @@ class Item
         $model->minStockQty = (int)$result->MinStockQty;
         $model->enabled = $result->Enabled === '1';
         $model->openSupplierOrderQty = $result->OpenSupplierOrderQTY;
-        $model->updateDate = new \DateTime($result->UpdateDate);
+        $model->updateDate = Helper::createDateTime($result->UpdateDate);
 
         return $model;
     }

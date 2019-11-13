@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Koempf\PixiClient\Response\Order\GetOrders;
 
+use Koempf\PixiClient\Helper;
+
 class Item
 {
     /** @var int */
@@ -48,7 +50,7 @@ class Item
     private $updatedBy;
     /** @var string */
     private $locationId;
-    /** @var string */
+    /** @var string|null */
     private $dfType;
     /** @var \DateTime|null */
     private $shippedDate;
@@ -79,13 +81,13 @@ class Item
         $model->shippingCostInOrderCurrency = (float)$result->ShipCost_OrderCurr;
         $model->discount = (float)$result->DiscountValue;
         $model->discountPercent = (float)$result->DiscountPerc;
-        $model->createDate = new \DateTime($result->CreateDate);
-        $model->updateDate = new \DateTime($result->UpdateDate);
+        $model->createDate = Helper::createDateTime($result->CreateDate);
+        $model->updateDate = Helper::createDateTime($result->UpdateDate);
         $model->createdBy = $result->CreateEmp;
         $model->updatedBy = $result->UpdateEmp;
         $model->locationId = $result->LocationID;
-        $model->dfType = $result->DF_type;
-        $model->shippedDate = $result->DFShipDate !== '1970-01-01T00:00:00' ? new \DateTime($result->DFShipDate) : null;
+        $model->dfType = $result->DF_type ?? null;
+        $model->shippedDate = Helper::createDateTime($result->DFShipDate ?? '');
         $model->taxesPercent = ((float)$result->VATPercent) * 100.0;
 
         return $model;
@@ -196,7 +198,7 @@ class Item
         return $this->locationId;
     }
 
-    public function getDfType(): string
+    public function getDfType(): ?string
     {
         return $this->dfType;
     }

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Koempf\PixiClient\Response\Order\GetOrders;
 
+use Koempf\PixiClient\Helper;
+
 class Order
 {
     /** @var int */
@@ -61,8 +63,8 @@ class Order
         $model->customer = Customer::create($result->Customer->row);
         $model->shippingVendor = $result->OrderShippingVendor;
         $model->discount = (float)$result->Discount;
-        $model->createDate = new \DateTime($result->CreateDate);
-        $model->updateDate = new \DateTime($result->UpdateDate);
+        $model->createDate = Helper::createDateTime($result->CreateDate);
+        $model->updateDate = Helper::createDateTime($result->UpdateDate);
         $model->updatedBy = $result->UpdateEmp;
         $model->channelReference = $result->ChannelRef;
         $model->looked = $result->OhSLocked !== 'N';
@@ -72,17 +74,8 @@ class Order
         $model->type = $result->OrderType;
         $model->pickList = $result->OnPicklist;
 
-        $model->items = Items::create(
-            is_array($result->OrderLines->row)
-                ? $result->OrderLines->row
-                : [$result->OrderLines->row]
-        );
-
-        $model->items = Items::create(
-            is_array($result->OrderLines->row)
-                ? $result->OrderLines->row
-                : [$result->OrderLines->row]
-        );
+        $orderLines = $result->Orderlines->row ?? [];
+        $model->items = Items::create(is_array($orderLines) ? $orderLines : [$orderLines]);
 
         return $model;
     }

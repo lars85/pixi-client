@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Koempf\PixiClient\Response\Order\GetOrders;
 
+use Koempf\PixiClient\Helper;
+
 class Address
 {
     /** @var string */
@@ -75,7 +77,7 @@ class Address
         $model->countryIso3Code = trim($result->CountryCodeISO3);
         $model->phone = $result->Phone;
         $model->eMail = $result->eMail;
-        $model->createDate = new \DateTime($result->CreateDate);
+        $model->createDate = Helper::createDateTime($result->CreateDate);
         $model->createdBy = $result->CreateEmp;
         $model->locked = $result->Locked !== 'N';
 

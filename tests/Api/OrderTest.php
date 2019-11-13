@@ -13,10 +13,7 @@ class OrderTest extends TestCase
     {
 //        $order = $this->getPixiClient()->order()->getOrderById(10341);
 
-//        var_dump($order);
-//
         $this->assertSame(1, 1);
-
     }
 
     public function testAddOrderXml()
