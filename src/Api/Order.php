@@ -48,7 +48,7 @@ class Order extends AbstractApi
         return Orders::create($results);
     }
 
-    public function getOrdersByReferenceId(int $referenceId)
+    public function getOrdersByReferenceId(string $referenceId)
     {
         return $this->getOrdersByReferenceIds([$referenceId])->getFirst();
     }
